@@ -153,8 +153,8 @@ class BaseSpatialSlicer(BaseSlicer):
         corners = ['R:0,0', 'R:4,0', 'R:0,4', 'R:4,4']
         rafts = [raft for raft in rafts if raft not in corners]
         chips = []
-        for chipx in range(0, 4, 1):
-            for chipy in range(0, 4, 1):
+        for chipx in range(0, 3, 1):
+            for chipy in range(0, 3, 1):
                 chips.append('S:%i,%i' % (chipx, chipy))
         for raft in rafts:
             for chip in chips:
