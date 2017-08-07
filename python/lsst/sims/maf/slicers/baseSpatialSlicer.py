@@ -142,6 +142,25 @@ class BaseSpatialSlicer(BaseSlicer):
             return {'idxs': indices, 'slicePoint': slicePoint}
         setattr(self, '_sliceSimData', _sliceSimData)
 
+    def _all_sciencechips(self):
+        """Make an array of science chip names so it's easy to chop off the wavefront sensors.
+        """
+        chipnames = []
+        rafts = []
+        for raftx in range(0, 5, 1):
+            for rafty in range(0, 5, 1):
+                rafts.append('R:%i,%i' % (raftx, rafty))
+        corners = ['R:0,0', 'R:4,0', 'R:0,4', 'R:4,4']
+        rafts = [raft for raft in rafts if raft not in corners]
+        chips = []
+        for chipx in range(0, 4, 1):
+            for chipy in range(0, 4, 1):
+                chips.append('S:%i,%i' % (chipx, chipy))
+        for raft in rafts:
+            for chip in chips:
+                chipnames.append(raft+' '+chip)
+        return np.array(chipnames, dtype=str)
+
     def _setupLSSTCamera(self):
         """If we want to include the camera chip gaps, etc"""
         mapper = LsstSimMapper()
@@ -156,6 +175,7 @@ class BaseSpatialSlicer(BaseSlicer):
         # Make a kdtree for the _slicepoints_
         # Using scipy 0.16 or later
         self._buildTree(self.slicePoints['ra'], self.slicePoints['dec'], leafsize=self.leafsize)
+        science_chips = self._all_sciencechips()
 
         # Loop over each unique pointing position
         for ind, ra, dec, rotSkyPos, mjd in zip(np.arange(simData.size), simData[self.lonCol],
@@ -180,6 +200,10 @@ class BaseSpatialSlicer(BaseSlicer):
                     good = np.where(checkedChipNames)[0]
                     chipNames = chipNames[good]
                     hpIndices = hpIndices[good]
+                else:
+                    good_chips = np.in1d(chipNames, science_chips)
+                    chipNames = chipNames[good_chips]
+                    hpIndices = hpIndices[good_chips]
                 # Find the healpixels that fell on a chip for this pointing
                 good = np.where(chipNames != [None])[0]
                 hpOnChip = hpIndices[good]
