@@ -177,10 +177,13 @@ class HealpixPowerSpectrum(BasePlotter):
         # If the mask is True everywhere (no data), just plot zeros
         if False not in metricValue.mask:
             return None
-        if plotDict['removeDipole']:
-            cl = hp.anafast(hp.remove_dipole(metricValue.filled(slicer.badval)), lmax=plotDict['maxl'])
-        else:
-            cl = hp.anafast(metricValue.filled(slicer.badval), lmax=plotDict['maxl'])
+        try:
+            if plotDict['removeDipole']:
+                cl = hp.anafast(hp.remove_dipole(metricValue.filled(slicer.badval)), lmax=plotDict['maxl'])
+            else:
+                cl = hp.anafast(metricValue.filled(slicer.badval), lmax=plotDict['maxl'])
+        except:
+            cl = np.zeros(100)
         ell = np.arange(np.size(cl))
         if plotDict['removeDipole']:
             condition = (ell > 1)
@@ -333,9 +336,10 @@ class BaseHistogram(BasePlotter):
         else:
             condition = ((metricValue >= histRange[0]) & (metricValue <= histRange[1]))
         plotValue = metricValue[condition]
-        if len(plotValue) == 0:
+        if len(plotValue[np.where(plotValue.mask == False)]) == 0:
             # No data is within histRange/bins. So let's just make a simple histogram anyway.
-            n, b, p = plt.hist(metricValue, bins=50, histtype='step', cumulative=plotDict['cumulative'],
+            n, b, p = plt.hist(np.zeros(metricValue.size), bins=50, histtype='step',
+                               cumulative=plotDict['cumulative'],
                                log=plotDict['logScale'], label=plotDict['label'],
                                color=plotDict['color'])
         else:
