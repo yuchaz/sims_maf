@@ -1,3 +1,9 @@
+# Notes to help build on mac (since makefile has permissions problems)
+
+# if you need to build the API documentation
 sphinx-apidoc -o source -f -H "lsst.sims.maf" ../python/
+(and be sure to cd doc; python metricList.py while sims_maf_contrib is set up, to build metricList.rst)
+
+# to just build the sphinx documentation html files
 sphinx-build -b html source ./html
-(and be sure to cd doc; python metricList.py while sims_maf_contrib is set up, first).
+
