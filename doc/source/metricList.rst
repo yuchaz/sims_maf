@@ -148,6 +148,8 @@ Core LSST MAF metrics
  	 Compute the number of changes of state that happen faster than 'cutoff'.
 - `NightPointingMetric <lsst.sims.maf.metrics.html#lsst.sims.maf.metrics.nightPointingMetric.NightPointingMetric>`_ 
  	 Gather relevant information for a night to plot.
+- `NightgapsMetric <lsst.sims.maf.metrics.html#lsst.sims.maf.metrics.tgaps.NightgapsMetric>`_ 
+ 	 Histogram all the night gaps. Similar to TgapsMetric, but based on 'night', not time.
 - `NormalizeMetric <lsst.sims.maf.metrics.html#lsst.sims.maf.metrics.summaryMetrics.NormalizeMetric>`_ 
  	 Return a metric values divided by 'normVal'. Useful for turning summary statistics into fractions.
 - `NoutliersNsigmaMetric <lsst.sims.maf.metrics.html#lsst.sims.maf.metrics.simpleMetrics.NoutliersNsigmaMetric>`_ 
@@ -192,6 +194,8 @@ Core LSST MAF metrics
  	 Base class for the metrics.
 - `StarDensityMetric <lsst.sims.maf.metrics.html#lsst.sims.maf.metrics.starDensity.StarDensityMetric>`_ 
  	 Interpolate the stellar luminosity function to return the number of
+- `StringCountMetric <lsst.sims.maf.metrics.html#lsst.sims.maf.metrics.stringCountMetric.StringCountMetric>`_ 
+ 	 Count up the number of times each string appears in a column.
 - `SumMetric <lsst.sims.maf.metrics.html#lsst.sims.maf.metrics.simpleMetrics.SumMetric>`_ 
  	 Calculate the sum of a simData column slice.
 - `TableFractionMetric <lsst.sims.maf.metrics.html#lsst.sims.maf.metrics.summaryMetrics.TableFractionMetric>`_ 

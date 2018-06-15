@@ -14,6 +14,12 @@ Contents:
    metricList.rst
    modules.rst
 
+Tutorial notebooks
+==================
+.. toctree::
+   :maxdepth: 2
+
+   Index
 
 Indices and tables
 ==================
@@ -21,4 +27,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-

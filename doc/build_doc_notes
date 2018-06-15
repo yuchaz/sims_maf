@@ -1,3 +1,6 @@
 sphinx-apidoc -o source -f -H "lsst.sims.maf" ../python/
 sphinx-build -b html source ./html
 (and be sure to cd doc; python metricList.py while sims_maf_contrib is set up, first).
+
+
+cd html; python -m http.server 8888 for viewing the html files

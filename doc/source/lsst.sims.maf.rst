@@ -1,5 +1,5 @@
-lsst\.sims\.maf package
-=======================
+lsst.sims.maf package
+=====================
 
 Subpackages
 -----------
@@ -17,18 +17,6 @@ Subpackages
     lsst.sims.maf.stackers
     lsst.sims.maf.utils
     lsst.sims.maf.web
-
-Submodules
-----------
-
-lsst\.sims\.maf\.version module
--------------------------------
-
-.. automodule:: lsst.sims.maf.version
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 
 Module contents
 ---------------
